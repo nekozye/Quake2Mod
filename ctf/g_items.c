@@ -36,6 +36,38 @@ void Weapon_GrenadeLauncher (edict_t *ent);
 void Weapon_Railgun (edict_t *ent);
 void Weapon_BFG (edict_t *ent);
 
+/*
+Start Valorant Mod
+*/
+void Weapon_Valorant_Classic(edict_t *ent);
+void Weapon_Valorant_Shorty(edict_t *ent);
+void Weapon_Valorant_Frenzy(edict_t *ent);
+void Weapon_Valorant_Ghost(edict_t *ent);
+void Weapon_Valorant_Sherrif(edict_t *ent);
+
+void Weapon_Valorant_Stinger(edict_t *ent);
+void Weapon_Valorant_Spectre(edict_t *ent);
+
+void Weapon_Valorant_Bucky(edict_t *ent);
+void Weapon_Valorant_Judge(edict_t *ent);
+
+void Weapon_Valorant_Bulldog(edict_t *ent);
+void Weapon_Valorant_Guardian(edict_t *ent);
+void Weapon_Valorant_Phantom(edict_t *ent);
+void Weapon_Valorant_Vandal(edict_t *ent);
+
+void Weapon_Valorant_Marshal(edict_t *ent);
+void Weapon_Valorant_Operator(edict_t *ent);
+
+void Weapon_Valorant_Ares(edict_t *ent);
+void Weapon_Valorant_Odin(edict_t *ent);
+
+/*
+End Valorant Mod
+*/
+
+
+
 gitem_armor_t jacketarmor_info	= { 25,  50, .30, .00, ARMOR_JACKET};
 gitem_armor_t combatarmor_info	= { 50, 100, .60, .30, ARMOR_COMBAT};
 gitem_armor_t bodyarmor_info	= {100, 200, .80, .60, ARMOR_BODY};

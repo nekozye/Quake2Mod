@@ -887,6 +887,7 @@ typedef struct
 	vec3_t		cmd_angles;			// angles sent over in the last command
 	int			game_helpchanged;
 	int			helpchanged;
+
 } client_respawn_t;
 
 // this structure is cleared on each PutClientInServer(),
@@ -1141,5 +1142,6 @@ struct edict_s
 
 //ZOID
 #include "g_ctf.h"
+#include "g_val.h"
 //ZOID
 

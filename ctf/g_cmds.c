@@ -431,6 +431,22 @@ void Cmd_Use_f (edict_t *ent)
 	it->use (ent, it);
 }
 
+/*
+==================
+Val_BuyMenu
+
+Opens a Buy Menu
+==================
+*/
+
+
+void Val_BuyMenu(edict_t *ent)
+{
+	gi.linkentity(ent);
+	ValoOpenBuyMenu(ent, NULL);
+}
+
+
 
 /*
 ==================
@@ -1059,7 +1075,10 @@ void ClientCommand (edict_t *ent)
 		CTFPlayerList(ent);
 	} else if (Q_stricmp(cmd, "observer") == 0) {
 		CTFObserver(ent);
+	} else if (Q_stricmp(cmd, "buymenu") == 0) {
+		Val_BuyMenu(ent);
 	}
+	
 //ZOID
 	else	// anything that doesn't match a command will be a chat
 		Cmd_Say_f (ent, false, true);

@@ -2933,6 +2933,184 @@ qboolean CTFMatchOn(void)
 }
 
 
+/*---------------------------valorant buy hudworks----------------------------*/
+
+
+pmenu_t buymenu[] = {
+	{ "*ValoQuake Buy Menu", PMENU_ALIGN_CENTER, NULL },
+	{ NULL, PMENU_ALIGN_CENTER, NULL },
+	{ NULL, PMENU_ALIGN_CENTER, NULL },
+	{ "Sidearms", PMENU_ALIGN_CENTER, ValoOpenSidearmMenu },
+	{ "SMGs", PMENU_ALIGN_CENTER, ValoOpenSMGMenu },
+	{ "Shotguns", PMENU_ALIGN_CENTER, ValoOpenShotgunMenu },
+	{ "Rifles", PMENU_ALIGN_CENTER, ValoOpenRifleMenu },
+	{ "Sniper", PMENU_ALIGN_CENTER, ValoOpenSniperMenu },
+	{ "Heavy", PMENU_ALIGN_CENTER, ValoOpenHeavyMenu },
+	{ "Ability", PMENU_ALIGN_CENTER, ValoOpenAbilityMenu },
+	{ NULL, PMENU_ALIGN_CENTER, NULL },
+	{ NULL, PMENU_ALIGN_CENTER, NULL },
+	{ "Use [ and ] to move cursor", PMENU_ALIGN_LEFT, NULL },
+	{ "ENTER to select", PMENU_ALIGN_LEFT, NULL },
+	{ "ESC to Exit Menu", PMENU_ALIGN_LEFT, NULL }
+};
+
+pmenu_t sidearmmenu[] = {
+	{ "*Sidearms", PMENU_ALIGN_CENTER, NULL },
+	{ NULL, PMENU_ALIGN_CENTER, NULL },
+	{ NULL, PMENU_ALIGN_CENTER, NULL },
+	{ "Classic", PMENU_ALIGN_CENTER, NULL },
+	{ "Shorty", PMENU_ALIGN_CENTER, NULL },
+	{ "Frenzy", PMENU_ALIGN_CENTER, NULL },
+	{ "Ghost", PMENU_ALIGN_CENTER, NULL },
+	{ "Sherrif", PMENU_ALIGN_CENTER, NULL },
+	{ NULL, PMENU_ALIGN_CENTER, NULL },
+	{ NULL, PMENU_ALIGN_CENTER, NULL }, 
+	{ "*Return to Buy Menu", PMENU_ALIGN_LEFT, ValoOpenBuyMenu }
+};
+
+pmenu_t smgmenu[] = {
+	{ "*SMGs", PMENU_ALIGN_CENTER, NULL },
+	{ NULL, PMENU_ALIGN_CENTER, NULL },
+	{ NULL, PMENU_ALIGN_CENTER, NULL },
+	{ "Stinger", PMENU_ALIGN_CENTER, NULL },
+	{ "Spectre", PMENU_ALIGN_CENTER, NULL },
+	{ NULL, PMENU_ALIGN_CENTER, NULL },
+	{ NULL, PMENU_ALIGN_CENTER, NULL }, 
+	{ "*Return to Buy Menu", PMENU_ALIGN_LEFT, ValoOpenBuyMenu }
+};
+
+pmenu_t shotgunmenu[] = {
+	{ "*Shotguns", PMENU_ALIGN_CENTER, NULL },
+	{ NULL, PMENU_ALIGN_CENTER, NULL },
+	{ NULL, PMENU_ALIGN_CENTER, NULL },
+	{ "Bucky", PMENU_ALIGN_CENTER, NULL },
+	{ "Judge", PMENU_ALIGN_CENTER, NULL },
+	{ NULL, PMENU_ALIGN_CENTER, NULL },
+	{ NULL, PMENU_ALIGN_CENTER, NULL },
+	{ "*Return to Buy Menu", PMENU_ALIGN_LEFT, ValoOpenBuyMenu }
+};
+
+pmenu_t riflemenu[] = {
+	{ "*Rifles", PMENU_ALIGN_CENTER, NULL },
+	{ NULL, PMENU_ALIGN_CENTER, NULL },
+	{ NULL, PMENU_ALIGN_CENTER, NULL },
+	{ "Bulldog", PMENU_ALIGN_CENTER, NULL },
+	{ "Guardian", PMENU_ALIGN_CENTER, NULL },
+	{ "Phantom", PMENU_ALIGN_CENTER, NULL },
+	{ "Vandal", PMENU_ALIGN_CENTER, NULL },
+	{ NULL, PMENU_ALIGN_CENTER, NULL },
+	{ NULL, PMENU_ALIGN_CENTER, NULL },
+	{ "*Return to Buy Menu", PMENU_ALIGN_LEFT, ValoOpenBuyMenu }
+};
+
+pmenu_t snipermenu[] = {
+	{ "*Snipers", PMENU_ALIGN_CENTER, NULL },
+	{ NULL, PMENU_ALIGN_CENTER, NULL },
+	{ NULL, PMENU_ALIGN_CENTER, NULL },
+	{ "Marshal", PMENU_ALIGN_CENTER, NULL },
+	{ "Operator", PMENU_ALIGN_CENTER, NULL },
+	{ NULL, PMENU_ALIGN_CENTER, NULL },
+	{ NULL, PMENU_ALIGN_CENTER, NULL },
+	{ "*Return to Buy Menu", PMENU_ALIGN_LEFT, ValoOpenBuyMenu }
+};
+
+pmenu_t heavymenu[] = {
+	{ "*Heavys", PMENU_ALIGN_CENTER, NULL },
+	{ NULL, PMENU_ALIGN_CENTER, NULL },
+	{ NULL, PMENU_ALIGN_CENTER, NULL },
+	{ "Ares", PMENU_ALIGN_CENTER, NULL },
+	{ "Odin", PMENU_ALIGN_CENTER, NULL },
+	{ NULL, PMENU_ALIGN_CENTER, NULL },
+	{ NULL, PMENU_ALIGN_CENTER, NULL },
+	{ "*Return to Buy Menu", PMENU_ALIGN_LEFT, ValoOpenBuyMenu }
+};
+
+pmenu_t abilitymenu[] = {
+	{ "*Abilities", PMENU_ALIGN_CENTER, NULL },
+	{ NULL, PMENU_ALIGN_CENTER, NULL },
+	{ NULL, PMENU_ALIGN_CENTER, NULL },
+	{ "Remote Bomb", PMENU_ALIGN_CENTER, NULL },
+	{ "Floating Flashbang", PMENU_ALIGN_CENTER, NULL },
+	{ "Recall Beacon", PMENU_ALIGN_CENTER, NULL },
+	{ "Alert Sentry", PMENU_ALIGN_CENTER, NULL },
+	{ "False Sound", PMENU_ALIGN_CENTER, NULL },
+	{ NULL, PMENU_ALIGN_CENTER, NULL },
+	{ NULL, PMENU_ALIGN_CENTER, NULL },
+	{ "*Return to Buy Menu", PMENU_ALIGN_LEFT, ValoOpenBuyMenu }
+};
+
+typedef enum val_weapon_s{
+	WEAPON_CLASSIC,
+	WEAPON_SHORTY,
+	WEAPON_FRENZY,
+	WEAPON_GHOST,
+	WEAPON_SHERRIF,
+	WEAPON_STINGER,
+	WEAPON_SPECTRE,
+	WEAPON_BUCKY,
+	WEAPON_JUDGE,
+	WEAPON_BULLDOG,
+	WEAPON_GUARDIAN,
+	WEAPON_PHANTOM,
+	WEAPON_VANDAL,
+	WEAPON_MARSHAL,
+	WEAPON_OPERATOR,
+	WEAPON_ARES,
+	WEAPON_ODIN
+}val_weapon_t;
+
+
+/*---------------------------valorant buy function def----------------------------*/
+
+void ValoOpenSidearmMenu(edict_t *ent){
+	PMenu_Close(ent);
+	PMenu_Open(ent, sidearmmenu, 3, sizeof(sidearmmenu) / sizeof(pmenu_t), NULL);
+}
+
+void ValoOpenSMGMenu(edict_t *ent){
+	PMenu_Close(ent);
+	PMenu_Open(ent, smgmenu, 3, sizeof(smgmenu) / sizeof(pmenu_t), NULL);
+}
+
+void ValoOpenShotgunMenu(edict_t *ent){
+	PMenu_Close(ent);
+	PMenu_Open(ent, shotgunmenu, 3, sizeof(shotgunmenu) / sizeof(pmenu_t), NULL);
+}
+
+void ValoOpenRifleMenu(edict_t *ent){
+	PMenu_Close(ent);
+	PMenu_Open(ent, riflemenu, 3, sizeof(riflemenu) / sizeof(pmenu_t), NULL);
+}
+
+void ValoOpenSniperMenu(edict_t *ent){
+	PMenu_Close(ent);
+	PMenu_Open(ent, snipermenu, 3, sizeof(snipermenu) / sizeof(pmenu_t), NULL);
+}
+
+void ValoOpenHeavyMenu(edict_t *ent){
+	PMenu_Close(ent);
+	PMenu_Open(ent, heavymenu, 3, sizeof(heavymenu) / sizeof(pmenu_t), NULL);
+}
+
+void ValoOpenAbilityMenu(edict_t *ent){
+	PMenu_Close(ent);
+	PMenu_Open(ent, abilitymenu, 3, sizeof(abilitymenu) / sizeof(pmenu_t), NULL);
+}
+
+
+
+void ValoCloseMenu(edict_t *ent, pmenuhnd_t *p)
+{
+	PMenu_Close(ent);
+}
+
+void ValoOpenBuyMenu(edict_t *ent)
+{
+	PMenu_Close(ent);
+	PMenu_Open(ent, buymenu, 3, sizeof(buymenu) / sizeof(pmenu_t), NULL);
+}
+
+
 /*-----------------------------------------------------------------------*/
 
 void CTFJoinTeam1(edict_t *ent, pmenuhnd_t *p);
@@ -3124,7 +3302,7 @@ int CTFUpdateJoinMenu(edict_t *ent)
 		joinmenu[jmenu_red].SelectFunc = CTFJoinTeam1;
 		joinmenu[jmenu_blue].SelectFunc = CTFJoinTeam2;
 	}
-
+	
 	if (ctf_forcejoin->string && *ctf_forcejoin->string) {
 		if (stricmp(ctf_forcejoin->string, "red") == 0) {
 			joinmenu[jmenu_blue].text = NULL;
@@ -3229,7 +3407,6 @@ qboolean CTFStartClient(edict_t *ent)
 		ent->client->resp.ctf_team = CTF_NOTEAM;
 		ent->client->ps.gunindex = 0;
 		gi.linkentity (ent);
-
 		CTFOpenJoinMenu(ent);
 		return true;
 	}
@@ -3257,6 +3434,8 @@ void CTFObserver(edict_t *ent)
 	gi.linkentity (ent);
 	CTFOpenJoinMenu(ent);
 }
+
+
 
 qboolean CTFInMatch(void)
 {

@@ -183,6 +183,7 @@ void PMenu_Next(edict_t *ent)
 
 	hnd = ent->client->menu;
 
+
 	if (hnd->cur < 0)
 		return; // no selectable entries
 
@@ -213,6 +214,7 @@ void PMenu_Prev(edict_t *ent)
 	}
 
 	hnd = ent->client->menu;
+
 
 	if (hnd->cur < 0)
 		return; // no selectable entries
@@ -245,6 +247,7 @@ void PMenu_Select(edict_t *ent)
 	}
 
 	hnd = ent->client->menu;
+
 
 	if (hnd->cur < 0)
 		return; // no selectable entries
