@@ -238,6 +238,7 @@ typedef struct
 #define WEAP_BFG				11
 #define WEAP_GRAPPLE			12
 
+
 typedef struct gitem_s
 {
 	char		*classname;	// spawning name
@@ -507,7 +508,36 @@ extern	int	body_armor_index;
 #define MOD_HIT				32
 #define MOD_TARGET_BLASTER	33
 #define MOD_GRAPPLE			34
+//Valorant
+#define MOD_VALORANT_CLASSIC				35
+#define MOD_VALORANT_SHORTY					36
+#define MOD_VALORANT_FRENZY					37
+#define MOD_VALORANT_GHOST					38
+#define MOD_VALORANT_SHERIFF				39
+
+
+#define MOD_VALORANT_STINGER				40
+#define MOD_VALORANT_SPECTRE				41
+
+#define MOD_VALORANT_BUCKY					42
+#define MOD_VALORANT_JUDGE					43
+
+#define MOD_VALORANT_BULLDOG				44
+#define MOD_VALORANT_GUARDIAN				45
+#define MOD_VALORANT_PHANTOM				46
+#define MOD_VALORANT_VANDAL					47
+
+#define MOD_VALORANT_MARSHAL				48
+#define MOD_VALORANT_OPERATOR				49
+
+#define MOD_VALORANT_ARES					50
+#define MOD_VALORANT_ODIN					51
+
+//Valorant
 #define MOD_FRIENDLY_FIRE	0x8000000
+
+
+
 
 extern	int	meansOfDeath;
 
@@ -863,6 +893,11 @@ typedef struct
 
 	int			power_cubes;	// used for tracking the cubes in coop games
 	int			score;			// for calculating total unit score in coop games
+
+	//Valorant
+	int			selected_primary; // negative if not selected
+	int			selected_secondary;// negative if not selected
+	//Valorant
 } client_persistant_t;
 
 // client data that stays across deathmatch respawns
@@ -1138,10 +1173,16 @@ struct edict_s
 	// common data blocks
 	moveinfo_t		moveinfo;
 	monsterinfo_t	monsterinfo;
+
+
 };
 
 //ZOID
 #include "g_ctf.h"
-#include "g_val.h"
+
 //ZOID
 
+
+//Valorant
+#include "g_val.h"
+//Valorant

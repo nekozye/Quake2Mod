@@ -39,11 +39,13 @@ void Weapon_BFG (edict_t *ent);
 /*
 Start Valorant Mod
 */
+
+void		Destroy_Weapon(edict_t *ent, gitem_t *inv);
 void Weapon_Valorant_Classic(edict_t *ent);
 void Weapon_Valorant_Shorty(edict_t *ent);
 void Weapon_Valorant_Frenzy(edict_t *ent);
 void Weapon_Valorant_Ghost(edict_t *ent);
-void Weapon_Valorant_Sherrif(edict_t *ent);
+void Weapon_Valorant_Sheriff(edict_t *ent);
 
 void Weapon_Valorant_Stinger(edict_t *ent);
 void Weapon_Valorant_Spectre(edict_t *ent);
@@ -2372,6 +2374,40 @@ tank commander's head
 	},
 
 //ZOID
+
+/*
+	Start Valorant Mod
+*/
+
+
+/* Valorant Classic */
+	{
+		"weapon_valorant_classic",//class name
+		Pickup_Weapon,//pickup function
+		Use_Weapon,//use function17125342
+		Destroy_Weapon,//drop function
+		Weapon_Valorant_Classic, //weapon thinkframe function
+		"misc/w_pkup.wav", //pickup sound file string
+		"models/weapons/v_blast/tris.md2",	// world model file string (not sure about this)
+		EF_ROTATE,	// world model flag. i am guessing if this is 1, use one at the top
+		"models/weapons/v_blast/tris.md2", // weapon view model
+		"w_blaster", // weapon icon 
+		"Classic", // weapon pickup name. used for printing on pickup
+		0, // number of digits to display by icon. no need in most of weapons.
+		1, // ammo how much is used every shot.
+		"Bullets", // name of the ammo weapon. usually bullet.
+		IT_WEAPON | IT_STAY_COOP, // IT_ Flags.
+		WEAP_BLASTER,
+		NULL,// weapon model index + information?
+		0, // tag?
+		"weapons/valorant/clscfire.wav misc/lasfly.wav" // precash. string of all model, sound, image and others that requires.
+	},
+
+/*
+	End Valorant Mod
+*/
+
+
 
 	// end of list marker
 	{NULL}

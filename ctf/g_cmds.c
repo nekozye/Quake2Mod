@@ -962,6 +962,221 @@ void Cmd_Say_f (edict_t *ent, qboolean team, qboolean arg0)
 	}
 }
 
+
+/*
+=================
+Valorant Commands
+=================
+*/
+
+//weapon selection helper functions
+qboolean Val_isSideArm(gitem_t* gun)
+{
+	if (Q_stricmp(gun->classname, "weapon_valorant_classic") == 0 ||
+		Q_stricmp(gun->classname, "weapon_valorant_shorty") == 0 ||
+		Q_stricmp(gun->classname, "weapon_valorant_frenzy") == 0 ||
+		Q_stricmp(gun->classname, "weapon_valorant_ghost") == 0 ||
+		Q_stricmp(gun->classname, "weapon_valorant_sheriff") == 0)
+		return true;
+	else
+		return false;
+}
+
+qboolean Val_isMainWeap(gitem_t* gun)
+{
+	if (Q_stricmp(gun->classname, "weapon_valorant_stinger") == 0 ||
+		Q_stricmp(gun->classname, "weapon_valorant_spectre") == 0 ||
+		Q_stricmp(gun->classname, "weapon_valorant_bucky") == 0 ||
+		Q_stricmp(gun->classname, "weapon_valorant_judge") == 0 ||
+		Q_stricmp(gun->classname, "weapon_valorant_bulldog") == 0 ||
+		Q_stricmp(gun->classname, "weapon_valorant_guardian") == 0 ||
+		Q_stricmp(gun->classname, "weapon_valorant_phantom") == 0 ||
+		Q_stricmp(gun->classname, "weapon_valorant_vandal") == 0 ||
+		Q_stricmp(gun->classname, "weapon_valorant_marshal") == 0 ||
+		Q_stricmp(gun->classname, "weapon_valorant_operator") == 0 ||
+		Q_stricmp(gun->classname, "weapon_valorant_ares") == 0 ||
+		Q_stricmp(gun->classname, "weapon_valorant_odin") == 0)
+		return true;
+	else
+		return false;
+}
+
+qboolean Val_isValWeapon(gitem_t* item)
+{
+	if (Val_isSideArm(item) == true || Val_isMainWeap == true)
+		return true;
+	else
+		return false;
+}
+
+void Val_CustomUse(edict_t *ent, char* name)
+{
+	int			index;
+	gitem_t		*it;
+	char		*s;
+
+	s = name;
+
+	it = FindItem(s);
+	if (!it)
+	{
+		gi.cprintf(ent, PRINT_HIGH, "unknown item: %s\n", s);
+		return;
+	}
+	if (!it->use)
+	{
+		gi.cprintf(ent, PRINT_HIGH, "Item is not usable.\n");
+		return;
+	}
+	index = ITEM_INDEX(it);
+	if (!ent->client->pers.inventory[index])
+	{
+		gi.cprintf(ent, PRINT_HIGH, "Out of item: %s\n", s);
+		return;
+	}
+
+	it->use(ent, it);
+}
+
+//automatically uses the correct selection
+void Val_SelectSecondary(edict_t *ent)
+{
+	gitem_t* secundo; 
+	if (ent->client->pers.selected_secondary == -1)
+		return;
+
+	
+	secundo = GetItemByIndex(ent->client->pers.selected_secondary);
+
+	
+	
+	
+	Val_CustomUse(ent, secundo->pickup_name);
+}
+
+void Val_SelectPrimary(edict_t *ent)
+{
+	gitem_t* primo;
+	if (ent->client->pers.selected_primary == -1)
+		return;
+
+	primo = GetItemByIndex(ent->client->pers.selected_primary);
+
+	Val_CustomUse(ent, primo->pickup_name);
+}
+
+weapondata_t valorant_bullet_quant[] =
+{
+	{ "weapon_valorant_classic", 30 },
+	{ "weapon_valorant_shorty", 12 },
+	{ "weapon_valorant_frenzy", 48 },
+	{ "weapon_valorant_ghost", 24 },
+	{ "weapon_valorant_sheriff", 12 },
+
+	{ "weapon_valorant_stinger", 2 },
+	{ "weapon_valorant_spectre", 2 },
+
+	{ "weapon_valorant_bucky", 2 },
+	{ "weapon_valorant_judge", 2 },
+
+	{ "weapon_valorant_bulldog", 2 },
+	{ "weapon_valorant_guardian", 2 },
+	{ "weapon_valorant_phantom", 2 },
+	{ "weapon_valorant_vandal", 2 },
+
+	{ "weapon_valorant_marshal", 2 },
+	{ "weapon_valorant_operator", 2 },
+
+	{ "weapon_valorant_ares", 2 },
+	{ "weapon_valorant_odin", 2 }
+};
+
+
+void Val_GetWeapon(edict_t *ent, gitem_t *gun){
+
+	if (Val_isSideArm(gun))
+	{
+		if (ent->client->pers.selected_secondary < 0)
+		{
+			//this happens when there is no selected secondary. this never should happen.
+			
+			ent->client->pers.inventory[ITEM_INDEX(gun)] = 1;
+			ent->client->pers.selected_secondary = ITEM_INDEX(gun);
+		}
+		else
+		{
+			//make sure you remove weapon before you add!
+			
+			ent->client->pers.inventory[ITEM_INDEX(gun)] = 1;
+			ent->client->pers.selected_secondary = ITEM_INDEX(gun);
+			
+		}
+		//need function to also give out bullets
+
+		gitem_t* current_sidearm = GetItemByIndex(ent->client->pers.selected_secondary);
+		
+		int requiredbulletcount = get_bulletcheck(current_sidearm->classname);
+
+		gitem_t* req_bullet = FindItem(current_sidearm->ammo);
+
+		if (requiredbulletcount != 0)
+			ent->client->pers.inventory[ITEM_INDEX(req_bullet)] = requiredbulletcount;
+
+		Val_SelectSecondary(ent);
+	}
+	else if (Val_isMainWeap(gun))
+	{
+		if (ent->client->pers.selected_primary < 0)
+		{
+			//this happens when there is no selected primary. no removal needed!
+			ent->client->pers.inventory[ITEM_INDEX(gun)] = 1;
+			ent->client->pers.selected_primary = ITEM_INDEX(gun);
+		}
+		else
+		{
+			//make sure you remove weapon before you add!
+			ent->client->pers.inventory[ITEM_INDEX(gun)] = 1;
+			ent->client->pers.selected_primary = ITEM_INDEX(gun);
+
+		}
+		//need function to also give out bullets
+
+		gitem_t* current_mainarm = GetItemByIndex(ent->client->pers.selected_primary);
+
+		int requiredbulletcount = get_bulletcheck(current_mainarm->classname);
+
+		gitem_t* req_bullet = FindItem(current_mainarm->ammo);
+
+		ent->client->pers.inventory[ITEM_INDEX(req_bullet)] = requiredbulletcount;
+
+		Val_SelectPrimary(ent);
+	}
+	else
+	{
+		return;
+	}
+}
+
+void Val_GetWepCom(edict_t *ent, char* name)
+{
+	gitem_t* predictive_gun = FindItem(name);
+
+	Val_GetWeapon(ent, predictive_gun);
+}
+
+int get_bulletcheck(char* name){
+	int i;
+	for (i = 0; i < 17; i++)
+	{
+		weapondata_t qqkls = valorant_bullet_quant[i];
+		if (Q_stricmp(name, qqkls.gun_name_internal) == 0)
+		{
+			return qqkls.bullet_number;
+		}
+	}
+	return -1;
+}
+
 /*
 =================
 ClientCommand
@@ -1075,11 +1290,25 @@ void ClientCommand (edict_t *ent)
 		CTFPlayerList(ent);
 	} else if (Q_stricmp(cmd, "observer") == 0) {
 		CTFObserver(ent);
-	} else if (Q_stricmp(cmd, "buymenu") == 0) {
+	} 
+
+//ZOID
+
+//Valorant
+	else if (Q_stricmp(cmd, "buymenu") == 0) {
 		Val_BuyMenu(ent);
 	}
-	
-//ZOID
+	else if (Q_stricmp(cmd, "val_specialget") == 0){
+		char* weapname = gi.args;
+		Val_GetWepCom(ent, weapname);
+	}
+	else if (Q_stricmp(cmd, "val_usesecond") == 0){
+		Val_SelectSecondary(ent);
+	}
+	else if (Q_stricmp(cmd, "val_usefirst") == 0){
+		Val_SelectPrimary(ent);
+	}
+//Valorant
 	else	// anything that doesn't match a command will be a chat
 		Cmd_Say_f (ent, false, true);
 }

@@ -417,6 +417,32 @@ void CL_ParseMuzzleFlash (void)
 		break;
 // PGM
 // ======================
+	//Valorant
+
+		//Sidearms
+	case MZ_VAL_CLASSIC:
+		dl->color[0] = 1; dl->color[1] = 1; dl->color[2] = 0;
+		S_StartSound(NULL, i, CHAN_WEAPON, S_RegisterSound("weapons/valorant/clscfire.wav"), volume*2, ATTN_NORM, 0);
+		break;
+	case MZ_VAL_SHORTY:
+		dl->color[0] = 1; dl->color[1] = 1; dl->color[2] = 0;
+		S_StartSound(NULL, i, CHAN_WEAPON, S_RegisterSound("weapons/valorant/shtyfr1a.wav"), volume*2, ATTN_NORM, 0);
+		S_StartSound(NULL, i, CHAN_AUTO, S_RegisterSound("weapons/valorant/shtyfr2a.wav"), volume * 2, ATTN_NORM, 0.1);
+		break;
+	case MZ_VAL_FRENZY:
+		dl->color[0] = 1; dl->color[1] = 1; dl->color[2] = 0;
+		Com_sprintf(soundname, sizeof(soundname), "weapons/valorant/frnzfr%ia.wav", (rand() % 5) + 1);
+		S_StartSound(NULL, i, CHAN_WEAPON, S_RegisterSound(soundname), volume * 2, ATTN_NORM, 0); break;
+	case MZ_VAL_GHOST:
+		dl->color[0] = 1; dl->color[1] = 1; dl->color[2] = 0;
+		S_StartSound(NULL, i, CHAN_WEAPON, S_RegisterSound("weapons/valorant/ghstfire.wav"), volume * 2, ATTN_NORM, 0);
+		break;
+	case MZ_VAL_SHERIFF:
+		dl->color[0] = 1; dl->color[1] = 1; dl->color[2] = 0;
+		S_StartSound(NULL, i, CHAN_WEAPON, S_RegisterSound("weapons/valorant/shrffire.wav"), volume * 2, ATTN_NORM, 0);
+		break;
+
+	//Valorant
 	}
 }
 

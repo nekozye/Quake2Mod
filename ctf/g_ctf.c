@@ -2958,11 +2958,11 @@ pmenu_t sidearmmenu[] = {
 	{ "*Sidearms", PMENU_ALIGN_CENTER, NULL },
 	{ NULL, PMENU_ALIGN_CENTER, NULL },
 	{ NULL, PMENU_ALIGN_CENTER, NULL },
-	{ "Classic", PMENU_ALIGN_CENTER, NULL },
+	{ "Classic", PMENU_ALIGN_CENTER, ValoClassic },
 	{ "Shorty", PMENU_ALIGN_CENTER, NULL },
 	{ "Frenzy", PMENU_ALIGN_CENTER, NULL },
 	{ "Ghost", PMENU_ALIGN_CENTER, NULL },
-	{ "Sherrif", PMENU_ALIGN_CENTER, NULL },
+	{ "Sheriff", PMENU_ALIGN_CENTER, NULL },
 	{ NULL, PMENU_ALIGN_CENTER, NULL },
 	{ NULL, PMENU_ALIGN_CENTER, NULL }, 
 	{ "*Return to Buy Menu", PMENU_ALIGN_LEFT, ValoOpenBuyMenu }
@@ -3039,25 +3039,6 @@ pmenu_t abilitymenu[] = {
 	{ "*Return to Buy Menu", PMENU_ALIGN_LEFT, ValoOpenBuyMenu }
 };
 
-typedef enum val_weapon_s{
-	WEAPON_CLASSIC,
-	WEAPON_SHORTY,
-	WEAPON_FRENZY,
-	WEAPON_GHOST,
-	WEAPON_SHERRIF,
-	WEAPON_STINGER,
-	WEAPON_SPECTRE,
-	WEAPON_BUCKY,
-	WEAPON_JUDGE,
-	WEAPON_BULLDOG,
-	WEAPON_GUARDIAN,
-	WEAPON_PHANTOM,
-	WEAPON_VANDAL,
-	WEAPON_MARSHAL,
-	WEAPON_OPERATOR,
-	WEAPON_ARES,
-	WEAPON_ODIN
-}val_weapon_t;
 
 
 /*---------------------------valorant buy function def----------------------------*/
@@ -3096,6 +3077,30 @@ void ValoOpenAbilityMenu(edict_t *ent){
 	PMenu_Close(ent);
 	PMenu_Open(ent, abilitymenu, 3, sizeof(abilitymenu) / sizeof(pmenu_t), NULL);
 }
+
+
+
+void ValoClassic(edict_t *ent)
+{
+	Val_GetWepCom(ent, "Classic");
+}
+void ValoShorty(edict_t *ent)
+{
+	Val_GetWepCom(ent, "Shorty");
+}
+void ValoFrenzy(edict_t *ent)
+{
+	Val_GetWepCom(ent, "Frenzy");
+}
+void ValoGhost(edict_t *ent)
+{
+	Val_GetWepCom(ent, "Ghost");
+}
+void ValoSheriff(edict_t *ent)
+{
+	Val_GetWepCom(ent, "Sheriff");
+}
+
 
 
 

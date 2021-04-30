@@ -372,6 +372,15 @@ void ClientObituary (edict_t *self, edict_t *inflictor, edict_t *attacker)
 				message2 = "'s grapple";
 				break;
 //ZOID
+//Valorant
+			case MOD_VALORANT_CLASSIC:
+				message = "was shot by";
+				message = "'s classic";
+
+			case MOD_VALORANT_SHORTY:
+				message = "was shot by";
+				message = "'s shorty";
+//Valorant
 
 			}
 			if (message)
@@ -613,11 +622,33 @@ void InitClientPersistant (gclient_t *client)
 
 	memset (&client->pers, 0, sizeof(client->pers));
 
-	item = FindItem("Blaster");
+
+	item = FindItem("Classic");
 	client->pers.selected_item = ITEM_INDEX(item);
 	client->pers.inventory[client->pers.selected_item] = 1;
 
+
+	client->pers.selected_secondary = ITEM_INDEX(item);
 	client->pers.weapon = item;
+
+	item = FindItem("Bullets");
+	client->pers.inventory[ITEM_INDEX(item)] = 30;
+	
+
+	//persistant data, used for tracking which item to remove.
+	client->pers.selected_primary = -1;
+	
+
+	client->pers.lastweapon = item;
+
+
+	
+	/*
+	valorant only allows one weapon, classic at start. later will be replaced
+
+	
+
+
 //ZOID
 	client->pers.lastweapon = item;
 //ZOID
@@ -626,7 +657,11 @@ void InitClientPersistant (gclient_t *client)
 	item = FindItem("Grapple");
 	client->pers.inventory[ITEM_INDEX(item)] = 1;
 //ZOID
+	*/
 
+	
+
+	
 	client->pers.health			= 100;
 	client->pers.max_health		= 100;
 

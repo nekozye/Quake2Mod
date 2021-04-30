@@ -656,6 +656,33 @@ typedef struct
 #define	MZ_NUKE8			39
 //ROGUE
 
+//Valorant
+#define MZ_VAL_CLASSIC			40
+#define MZ_VAL_SHORTY			41
+#define MZ_VAL_FRENZY			42
+#define MZ_VAL_GHOST			43
+#define MZ_VAL_SHERIFF			44
+
+#define	MZ_VAL_STINGER			45
+#define	MZ_VAL_SPECTRE			46
+
+#define	MZ_VAL_BUCKY			47
+#define	MZ_VAL_JUDGE			48
+
+#define MZ_VAL_BULLDOG			49
+#define MZ_VAL_GUARDIAN			50
+#define MZ_VAL_PHANTOM			51
+#define MZ_VAL_VANDAL			52
+
+#define MZ_VAL_MARSHAL			53
+#define MZ_VAL_OPERATOR			54
+
+#define MZ_VAL_ARES				55
+#define MZ_VAL_ODIN				56
+//Valorant
+
+
+
 //
 // monster muzzle flashes
 //

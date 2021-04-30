@@ -917,3 +917,23 @@ void fire_bfg (edict_t *self, vec3_t start, vec3_t dir, int damage, int speed, f
 
 	gi.linkentity (bfg);
 }
+
+
+/*
+=================
+fire_valorant_classic
+
+Fires a single blaster bolt.  Used by the blaster and hyper blaster.
+=================
+*/
+
+
+
+
+void fire_valorant_shorty(edict_t *self, vec3_t start, vec3_t aimdir, int damage, int kick, int hspread, int vspread, int count, int mod)
+{
+	int		i;
+
+	for (i = 0; i < count; i++)
+		fire_lead(self, start, aimdir, damage, kick, TE_SHOTGUN, hspread, vspread, mod);
+}

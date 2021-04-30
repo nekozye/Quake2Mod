@@ -368,6 +368,30 @@ void Drop_Weapon (edict_t *ent, gitem_t *item)
 
 /*
 ================
+
+================
+*/
+void Destroy_Weapon(edict_t *ent, gitem_t *item)
+{
+	int		index;
+
+	if ((int)(dmflags->value) & DF_WEAPONS_STAY)
+		return;
+
+	index = ITEM_INDEX(item);
+	// see if we're already using it
+	if (((item == ent->client->pers.weapon) || (item == ent->client->newweapon)) && (ent->client->pers.inventory[index] == 1))
+	{
+		gi.cprintf(ent, PRINT_HIGH, "Can't drop current weapon\n");
+		return;
+	}
+
+	ent->client->pers.inventory[index]--;
+}
+
+
+/*
+================
 Weapon_Generic
 
 A generic function to handle the basics of weapon thinking
@@ -488,7 +512,8 @@ static void Weapon_Generic2 (edict_t *ent, int FRAME_ACTIVATE_LAST, int FRAME_FI
 					gi.sound(ent, CHAN_VOICE, gi.soundindex("weapons/noammo.wav"), 1, ATTN_NORM, 0);
 					ent->pain_debounce_time = level.time + 1;
 				}
-				NoAmmoWeaponChange (ent);
+				//do not change even if ammo is out
+				//NoAmmoWeaponChange (ent);
 			}
 		}
 		else
@@ -1465,5 +1490,189 @@ void Weapon_BFG (edict_t *ent)
 	Weapon_Generic (ent, 8, 32, 55, 58, pause_frames, fire_frames, weapon_bfg_fire);
 }
 
+
+//======================================================================
+
+
+/*
+======================================================================
+
+Valorant New Code, Weapon Valorant Classic
+
+
+======================================================================
+*/
+
+void Valorant_Classic_Fire (edict_t *ent)
+{
+	
+	int		damage;
+	vec3_t	forward, right;
+	vec3_t	start;
+	vec3_t	offset;
+
+
+
+	damage = 15;
+
+	//Blaster_Fire(ent, vec3_origin, damage, false, EF_BLASTER);
+
+	AngleVectors(ent->client->v_angle, forward, right, NULL);
+
+	VectorScale(forward, -2, ent->client->kick_origin);
+	ent->client->kick_angles[0] = -2;
+
+	VectorSet(offset, 0, 8, ent->viewheight - 8);
+	P_ProjectSource(ent->client, ent->s.origin, offset, forward, right, start);
+
+	fire_bullet(ent, start, forward, 500, 100, 0, 0, MOD_VALORANT_CLASSIC);
+
+	// send muzzle flash
+	gi.WriteByte(svc_muzzleflash);
+	gi.WriteShort(ent - g_edicts);
+	gi.WriteByte(MZ_VAL_CLASSIC | is_silenced);
+	gi.multicast(ent->s.origin, MULTICAST_PVS);
+
+
+
+	ent->client->ps.gunframe++;
+	PlayerNoise(ent, start, PNOISE_WEAPON);
+
+	//end blaster code
+
+	//ammo reduction
+	if (!((int)dmflags->value & DF_INFINITE_AMMO))
+		ent->client->pers.inventory[ent->client->ammo_index] -= 1;
+
+}
+void Weapon_Valorant_Classic(edict_t *ent)
+{
+	static int	pause_frames[] = { 19, 32, 0 };
+	static int	fire_frames[] = { 5, 0 };
+
+	Weapon_Generic(ent, 4, 8, 52, 55, pause_frames, fire_frames, Valorant_Classic_Fire);
+}
+
+//======================================================================
+
+
+/*
+======================================================================
+
+Valorant New Code, Weapon Valorant Shorty
+
+======================================================================
+*/
+
+void Valorant_Shorty_Fire(edict_t *ent)
+{
+	vec3_t		start;
+	vec3_t		forward, right;
+	vec3_t		offset;
+	int			damage = 4;
+	int			kick = 8;
+
+	if (ent->client->ps.gunframe == 9)
+	{
+		ent->client->ps.gunframe++;
+		return;
+	}
+
+	AngleVectors(ent->client->v_angle, forward, right, NULL);
+
+	VectorScale(forward, -2, ent->client->kick_origin);
+	ent->client->kick_angles[0] = -2;
+
+	VectorSet(offset, 0, 8, ent->viewheight - 8);
+	P_ProjectSource(ent->client, ent->s.origin, offset, forward, right, start);
+
+	fire_valorant_shorty(ent, start, forward, damage, kick, 500, 500, DEFAULT_DEATHMATCH_SHOTGUN_COUNT, MOD_VALORANT_SHORTY);
+
+	// send muzzle flash
+	gi.WriteByte(svc_muzzleflash);
+	gi.WriteShort(ent - g_edicts);
+	gi.WriteByte(MZ_VAL_SHORTY | is_silenced);
+	gi.multicast(ent->s.origin, MULTICAST_PVS);
+
+	ent->client->ps.gunframe++;
+	PlayerNoise(ent, start, PNOISE_WEAPON);
+
+	if (!((int)dmflags->value & DF_INFINITE_AMMO))
+		ent->client->pers.inventory[ent->client->ammo_index]--;
+}
+void Weapon_Valorant_Shorty(edict_t *ent)
+{
+	static int	pause_frames[] = { 22, 28, 34, 0 };
+	static int	fire_frames[] = { 8, 9, 0 };
+
+	Weapon_Generic(ent, 7, 18, 36, 39, pause_frames, fire_frames, Valorant_Shorty_Fire);
+}
+
+//======================================================================
+
+
+/*
+======================================================================
+
+Valorant New Code, Weapon Valorant Frenzy
+
+======================================================================
+*/
+
+void Valorant_Frenzy_Fire(edict_t *ent)
+{
+
+}
+void Weapon_Valorant_Frenzy(edict_t *ent)
+{
+	static int	pause_frames[] = { 19, 32, 0 };
+	static int	fire_frames[] = { 5, 0 };
+
+	Weapon_Generic(ent, 4, 8, 52, 55, pause_frames, fire_frames, Valorant_Frenzy_Fire);
+}
+
+//======================================================================
+
+/*
+======================================================================
+
+Valorant New Code, Weapon Valorant Ghost
+
+======================================================================
+*/
+
+void Valorant_Ghost_Fire(edict_t *ent)
+{
+	
+}
+void Weapon_Valorant_Ghost(edict_t *ent)
+{
+	static int	pause_frames[] = { 19, 32, 0 };
+	static int	fire_frames[] = { 5, 0 };
+
+	Weapon_Generic(ent, 4, 8, 52, 55, pause_frames, fire_frames, Valorant_Ghost_Fire);
+}
+
+//======================================================================
+
+/*
+======================================================================
+
+Valorant New Code, Weapon Valorant Sheriff
+
+======================================================================
+*/
+
+void Valorant_Sheriff_Fire(edict_t *ent)
+{
+	
+}
+void Weapon_Valorant_Sheriff(edict_t *ent)
+{
+	static int	pause_frames[] = { 19, 32, 0 };
+	static int	fire_frames[] = { 5, 0 };
+
+	Weapon_Generic(ent, 4, 8, 52, 55, pause_frames, fire_frames, Valorant_Sheriff_Fire);
+}
 
 //======================================================================

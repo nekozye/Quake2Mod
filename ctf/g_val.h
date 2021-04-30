@@ -18,16 +18,37 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 */
 
+typedef struct weapondata_s{
+	char* gun_name_internal;
+	int bullet_number;
+}weapondata_t;
+
+
+int get_bulletcheck(char* name);
+
+
 
 void Val_BuyMenu(edict_t *ent);
-/*
-void ValoWeaponSelect(edict_t *ent, pmenuhnd_t *p, val_weapon_t);
+
+qboolean Val_isSideArm(gitem_t* gun);
+qboolean Val_isMainWeap(gitem_t* gun);
+qboolean Val_isValWeapon(gitem_t* item);
+
+void Val_GetWeapon(edict_t *ent, gitem_t *gun);
+void Val_GetWepCom(edict_t *ent, char* name);
+
+void Val_CustomUse(edict_t * ent, char* name);
+
+void Val_SelectSecondary(edict_t *ent);
+void Val_SelectPrimary(edict_t *ent);
+
 
 void ValoClassic(edict_t *ent, pmenuhnd_t *p);
 void ValoShorty(edict_t *ent, pmenuhnd_t *p);
 void ValoFrenzy(edict_t *ent, pmenuhnd_t *p);
 void ValoGhost(edict_t *ent, pmenuhnd_t *p);
-void ValoSherrif(edict_t *ent, pmenuhnd_t *p);
+void ValoSheriff(edict_t *ent, pmenuhnd_t *p);
+/*
 
 void ValoStinger(edict_t *ent, pmenuhnd_t *p);
 void ValoSpectre(edict_t *ent, pmenuhnd_t *p);
