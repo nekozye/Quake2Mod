@@ -2402,6 +2402,152 @@ tank commander's head
 		0, // tag?
 		"weapons/valorant/clscfire.wav misc/lasfly.wav" // precash. string of all model, sound, image and others that requires.
 	},
+	{
+		"weapon_valorant_shorty",//class name
+		Pickup_Weapon,//pickup function
+		Use_Weapon,//use function17125342
+		Destroy_Weapon,//drop function
+		Weapon_Valorant_Shorty, //weapon thinkframe function
+		"misc/w_pkup.wav", //pickup sound file string
+		"models/weapons/v_blast/tris.md2",	// world model file string (not sure about this)
+		EF_ROTATE,	// world model flag. i am guessing if this is 1, use one at the top
+		"models/weapons/v_blast/tris.md2", // weapon view model
+		"w_blaster", // weapon icon 
+		"Shorty", // weapon pickup name. used for printing on pickup
+		0, // number of digits to display by icon. no need in most of weapons.
+		1, // ammo how much is used every shot.
+		"Shells", // name of the ammo weapon. usually bullet.
+		IT_WEAPON | IT_STAY_COOP, // IT_ Flags.
+		WEAP_BLASTER,
+		NULL,// weapon model index + information?
+		0, // tag?
+		"weapons/valorant/shtyfr1a.wav weapons/valorant/shtyfr2a.wav misc/lasfly.wav" // precash. string of all model, sound, image and others that requires.
+	},
+
+	{
+		"weapon_valorant_frenzy",//class name
+		Pickup_Weapon,//pickup function
+		Use_Weapon,//use function17125342
+		Destroy_Weapon,//drop function
+		Weapon_Valorant_Frenzy, //weapon thinkframe function
+		"misc/w_pkup.wav", //pickup sound file string
+		"models/weapons/v_blast/tris.md2",	// world model file string (not sure about this)
+		EF_ROTATE,	// world model flag. i am guessing if this is 1, use one at the top
+		"models/weapons/v_blast/tris.md2", // weapon view model
+		"w_blaster", // weapon icon 
+		"Frenzy", // weapon pickup name. used for printing on pickup
+		0, // number of digits to display by icon. no need in most of weapons.
+		1, // ammo how much is used every shot.
+		"Bullets", // name of the ammo weapon. usually bullet.
+		IT_WEAPON | IT_STAY_COOP, // IT_ Flags.
+		WEAP_BLASTER,
+		NULL,// weapon model index + information?
+		0, // tag?
+		"weapons/valorant/frnzfr1a.wav weapons/valorant/frnzfr2a.wav weapons/valorant/frnzfr3a.wav weapons/valorant/frnzfr4a.wav weapons/valorant/frnzfr5a.wav misc/lasfly.wav" // precash. string of all model, sound, image and others that requires.
+	},
+	{
+		"weapon_valorant_ghost",//class name
+		Pickup_Weapon,//pickup function
+		Use_Weapon,//use function17125342
+		Destroy_Weapon,//drop function
+		Weapon_Valorant_Ghost, //weapon thinkframe function
+		"misc/w_pkup.wav", //pickup sound file string
+		"models/weapons/v_blast/tris.md2",	// world model file string (not sure about this)
+		EF_ROTATE,	// world model flag. i am guessing if this is 1, use one at the top
+		"models/weapons/v_blast/tris.md2", // weapon view model
+		"w_blaster", // weapon icon 
+		"Ghost", // weapon pickup name. used for printing on pickup
+		0, // number of digits to display by icon. no need in most of weapons.
+		1, // ammo how much is used every shot.
+		"Bullets", // name of the ammo weapon. usually bullet.
+		IT_WEAPON | IT_STAY_COOP, // IT_ Flags.
+		WEAP_BLASTER,
+		NULL,// weapon model index + information?
+		0, // tag?
+		"weapons/valorant/ghstfire.wav misc/lasfly.wav" // precash. string of all model, sound, image and others that requires.
+	}, 
+
+	{
+		"weapon_valorant_stinger",
+		Pickup_Weapon,
+		Use_Weapon,
+		Destroy_Weapon,
+		Weapon_Valorant_Stinger,
+		"misc/w_pkup.wav",
+		"models/weapons/g_machn/tris.md2", EF_ROTATE,
+		"models/weapons/v_machn/tris.md2",
+		/* icon */		"w_machinegun",
+		/* pickup */	"Stinger",
+		0,
+		1,
+		"Bullets",
+		IT_WEAPON | IT_STAY_COOP,
+		WEAP_MACHINEGUN,
+		NULL,
+		0,
+		/* precache */ "weapons/valorant/stngfr1a.wav misc/lasfly.wav"
+	},
+	{
+		"weapon_valorant_spectre",
+		Pickup_Weapon,
+		Use_Weapon,
+		Destroy_Weapon,
+		Weapon_Valorant_Spectre,
+		"misc/w_pkup.wav",
+		"models/weapons/g_machn/tris.md2", EF_ROTATE,
+		"models/weapons/v_machn/tris.md2",
+		/* icon */		"w_machinegun",
+		/* pickup */	"Spectre",
+		0,
+		1,
+		"Bullets",
+		IT_WEAPON | IT_STAY_COOP,
+		WEAP_MACHINEGUN,
+		NULL,
+		0,
+		/* precache */ "weapons/valorant/spctfr1a.wav misc/lasfly.wav"
+	},
+	{
+		"weapon_valorant_bucky",
+		Pickup_Weapon,
+		Use_Weapon,
+		Destroy_Weapon,
+		Weapon_Valorant_Bucky,
+		"misc/w_pkup.wav",
+		"models/weapons/g_shotg2/tris.md2", EF_ROTATE,
+		"models/weapons/v_shotg2/tris.md2",
+		/* icon */		"w_sshotgun",
+		/* pickup */	"Bucky",
+		0,
+		2,
+		"Shells",
+		IT_WEAPON | IT_STAY_COOP,
+		WEAP_SUPERSHOTGUN,
+		NULL,
+		0,
+		/* precache */ "weapons/valorant/bukyfr1a.wav"
+	},
+	{
+		"weapon_valorant_judge",
+		Pickup_Weapon,
+		Use_Weapon,
+		Destroy_Weapon,
+		Weapon_Valorant_Judge,
+		"misc/w_pkup.wav",
+		"models/weapons/g_shotg/tris.md2", EF_ROTATE,
+		"models/weapons/v_shotg/tris.md2",
+		/* icon */		"w_shotgun",
+		/* pickup */	"Judge",
+		0,
+		1,
+		"Shells",
+		IT_WEAPON | IT_STAY_COOP,
+		WEAP_SHOTGUN,
+		NULL,
+		0,
+		/* precache */ "weapons/valorant/judgfr1a.wav"
+	},
+
 
 /*
 	End Valorant Mod

@@ -1073,11 +1073,11 @@ weapondata_t valorant_bullet_quant[] =
 	{ "weapon_valorant_ghost", 24 },
 	{ "weapon_valorant_sheriff", 12 },
 
-	{ "weapon_valorant_stinger", 2 },
-	{ "weapon_valorant_spectre", 2 },
+	{ "weapon_valorant_stinger", 50 },
+	{ "weapon_valorant_spectre", 50 },
 
-	{ "weapon_valorant_bucky", 2 },
-	{ "weapon_valorant_judge", 2 },
+	{ "weapon_valorant_bucky", 30 },
+	{ "weapon_valorant_judge", 50 },
 
 	{ "weapon_valorant_bulldog", 2 },
 	{ "weapon_valorant_guardian", 2 },

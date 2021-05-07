@@ -2139,6 +2139,7 @@ SAY_TEAM
 
 // This array is in 'importance order', it indicates what items are
 // more important when reporting their names.
+//TODO add valorant weapons
 struct {
 	char *classname;
 	int priority;
@@ -2959,10 +2960,10 @@ pmenu_t sidearmmenu[] = {
 	{ NULL, PMENU_ALIGN_CENTER, NULL },
 	{ NULL, PMENU_ALIGN_CENTER, NULL },
 	{ "Classic", PMENU_ALIGN_CENTER, ValoClassic },
-	{ "Shorty", PMENU_ALIGN_CENTER, NULL },
-	{ "Frenzy", PMENU_ALIGN_CENTER, NULL },
-	{ "Ghost", PMENU_ALIGN_CENTER, NULL },
-	{ "Sheriff", PMENU_ALIGN_CENTER, NULL },
+	{ "Shorty", PMENU_ALIGN_CENTER, ValoShorty },
+	{ "Frenzy", PMENU_ALIGN_CENTER, ValoFrenzy },
+	{ "Ghost", PMENU_ALIGN_CENTER, ValoGhost },
+	{ "Sheriff", PMENU_ALIGN_CENTER, ValoSheriff },
 	{ NULL, PMENU_ALIGN_CENTER, NULL },
 	{ NULL, PMENU_ALIGN_CENTER, NULL }, 
 	{ "*Return to Buy Menu", PMENU_ALIGN_LEFT, ValoOpenBuyMenu }
@@ -2972,8 +2973,8 @@ pmenu_t smgmenu[] = {
 	{ "*SMGs", PMENU_ALIGN_CENTER, NULL },
 	{ NULL, PMENU_ALIGN_CENTER, NULL },
 	{ NULL, PMENU_ALIGN_CENTER, NULL },
-	{ "Stinger", PMENU_ALIGN_CENTER, NULL },
-	{ "Spectre", PMENU_ALIGN_CENTER, NULL },
+	{ "Stinger", PMENU_ALIGN_CENTER, ValoStinger},
+	{ "Spectre", PMENU_ALIGN_CENTER, ValoSpectre},
 	{ NULL, PMENU_ALIGN_CENTER, NULL },
 	{ NULL, PMENU_ALIGN_CENTER, NULL }, 
 	{ "*Return to Buy Menu", PMENU_ALIGN_LEFT, ValoOpenBuyMenu }
@@ -2983,8 +2984,8 @@ pmenu_t shotgunmenu[] = {
 	{ "*Shotguns", PMENU_ALIGN_CENTER, NULL },
 	{ NULL, PMENU_ALIGN_CENTER, NULL },
 	{ NULL, PMENU_ALIGN_CENTER, NULL },
-	{ "Bucky", PMENU_ALIGN_CENTER, NULL },
-	{ "Judge", PMENU_ALIGN_CENTER, NULL },
+	{ "Bucky", PMENU_ALIGN_CENTER, ValoBucky },
+	{ "Judge", PMENU_ALIGN_CENTER, ValoJudge },
 	{ NULL, PMENU_ALIGN_CENTER, NULL },
 	{ NULL, PMENU_ALIGN_CENTER, NULL },
 	{ "*Return to Buy Menu", PMENU_ALIGN_LEFT, ValoOpenBuyMenu }
@@ -3100,6 +3101,25 @@ void ValoSheriff(edict_t *ent)
 {
 	Val_GetWepCom(ent, "Sheriff");
 }
+
+void ValoStinger(edict_t *ent)
+{
+	Val_GetWepCom(ent, "Stinger");
+}
+void ValoSpectre(edict_t *ent)
+{
+	Val_GetWepCom(ent, "Spectre");
+}
+
+void ValoBucky(edict_t *ent)
+{
+	Val_GetWepCom(ent, "Bucky");
+}
+void ValoJudge(edict_t *ent)
+{
+	Val_GetWepCom(ent, "Judge");
+}
+
 
 
 

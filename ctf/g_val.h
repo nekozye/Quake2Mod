@@ -48,7 +48,6 @@ void ValoShorty(edict_t *ent, pmenuhnd_t *p);
 void ValoFrenzy(edict_t *ent, pmenuhnd_t *p);
 void ValoGhost(edict_t *ent, pmenuhnd_t *p);
 void ValoSheriff(edict_t *ent, pmenuhnd_t *p);
-/*
 
 void ValoStinger(edict_t *ent, pmenuhnd_t *p);
 void ValoSpectre(edict_t *ent, pmenuhnd_t *p);
@@ -58,8 +57,10 @@ void ValoJudge(edict_t *ent, pmenuhnd_t *p);
 
 void ValoBulldog(edict_t *ent, pmenuhnd_t *p);
 void ValoGuardian(edict_t *ent, pmenuhnd_t *p);
+/*
 void ValoPhantom(edict_t *ent, pmenuhnd_t *p);
 void ValoVandal(edict_t *ent, pmenuhnd_t *p);
+/*
 
 void ValoMarshal(edict_t *ent, pmenuhnd_t *p);
 void ValoOperator(edict_t *ent, pmenuhnd_t *p);

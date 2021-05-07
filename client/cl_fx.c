@@ -442,6 +442,34 @@ void CL_ParseMuzzleFlash (void)
 		S_StartSound(NULL, i, CHAN_WEAPON, S_RegisterSound("weapons/valorant/shrffire.wav"), volume * 2, ATTN_NORM, 0);
 		break;
 
+
+
+	case MZ_VAL_STINGER:
+		dl->color[0] = 1; dl->color[1] = 1; dl->color[2] = 0;
+		Com_sprintf(soundname, sizeof(soundname), "weapons/valorant/stngfr%ia.wav", 1);
+		S_StartSound(NULL, i, CHAN_WEAPON, S_RegisterSound(soundname), volume * 2, ATTN_NORM, 0); break;
+	case MZ_VAL_SPECTRE:
+		dl->color[0] = 1; dl->color[1] = 1; dl->color[2] = 0;
+		Com_sprintf(soundname, sizeof(soundname), "weapons/valorant/spctfr%ia.wav", 1);
+		S_StartSound(NULL, i, CHAN_WEAPON, S_RegisterSound(soundname), volume * 2, ATTN_NORM, 0); break;
+
+	case MZ_VAL_BUCKY:
+		dl->color[0] = 1; dl->color[1] = 1; dl->color[2] = 0;
+		S_StartSound(NULL, i, CHAN_WEAPON, S_RegisterSound("weapons/valorant/bukyfr1a.wav"), volume * 2, ATTN_NORM, 0);
+		break;
+
+	case MZ_VAL_JUDGE:
+		dl->color[0] = 1; dl->color[1] = 1; dl->color[2] = 0;
+		S_StartSound(NULL, i, CHAN_WEAPON, S_RegisterSound("weapons/valorant/judgfr1a.wav"), volume * 2, ATTN_NORM, 0);
+		break;
+
+	case MZ_VAL_BULLDOG:
+		dl->color[0] = 1; dl->color[1] = 1; dl->color[2] = 0;
+		Com_sprintf(soundname, sizeof(soundname), "weapons/valorant/bldgfr%ia.wav", 1);
+		S_StartSound(NULL, i, CHAN_WEAPON, S_RegisterSound(soundname), volume * 2, ATTN_NORM, 0); break;
+
+
+
 	//Valorant
 	}
 }
